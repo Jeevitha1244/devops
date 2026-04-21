@@ -1,0 +1,24 @@
+sudo apt update 
+sudo apt install openjdk-17-jdk -y 
+java --version
+gradle -v
+sudo apt remove gradle -y  #Remove Gradle Installed via APT 
+ls ~/.sdkman  #Remove Gradle Installed via SDKMAN First check if SDKMAN is installed: 
+#If it exists, then uninstall Gradle using:
+sdk uninstall gradle <version?> --force  
+#sdk uninstall gradle 8.13 --force
+
+sudo apt install maven -y
+mvn -version
+#Download and Extract Gradle
+wget <https://services.gradle.org/distributions/gradle-8.14-bin.zip> 
+-P /tmp 
+sudo unzip -d /opt/gradle /tmp/gradle-8.14-bin.zip
+#Modify bash command file by running the following command
+gedit ~/.bashrc
+#At the end of the file, add the following lines
+export GRADLE_HOME=/opt/gradle/gradle-8.14 
+export PATH=${GRADLE_HOME}/bin:${PATH}  
+#save the file
+#Then to apply the changes run the following in terminal
+source ~/.bashrc
