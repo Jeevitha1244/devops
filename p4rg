@@ -1,0 +1,129 @@
+#refer to Experiment 2: Working with Maven
+mvn archetype:generate -DgroupId=com.example -DartifactId=HelloMaven -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+#Update pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>HelloMaven</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>HelloMaven</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.0</junit.version>
+    </properties>
+
+    <dependencies>
+        <!-- JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+
+            <!-- Surefire Plugin for JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
+
+#Update AppTest.java
+gedit src/test/java/com/example/AppTest.java
+#replace the content
+package com.example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class AppTest {
+
+    @Test
+    void shouldAnswerWithTrue() {
+        assertTrue(true);
+    }
+}
+#Build the project using
+mvn clean test
+mvn package
+mvn clean package -DskipTests
+java -cp target/HelloMaven-1.0-SNAPSHOT.jar com.example.App
+#expected output 
+#Hello World!
+#partB Migrate the Application to Gradle 
+#initialize the gradle
+gradle init
+tree
+#Update the Generated Gradle Build Script 
+gedit build.gradle
+#replace the content 
+plugins {
+    id 'application'
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+description = 'HelloMaven'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+application {
+    mainClass = 'com.example.App'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+#Build the Project Using Gradle
+gradle build
+gradel run
+
+
