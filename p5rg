@@ -1,0 +1,20 @@
+#Update Your System
+sudo apt update
+sudo apt upgrade -y
+sudo apt install fontconfig openjdk-17-jre -y
+#check version
+java -version
+#Add the Jenkins Repository Key
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
+#Add the Jenkins Repository to Your Sources List
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+#Update Your Package List and Install Jenkins
+sudo apt update
+sudo apt install jenkins -y
+#Start and Enable the Jenkins Service
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+#then 
+sudo systemctl status jenkins
+#Retrieve the initial administrator password by running the following command in your terminal
+3.	sudo cat /var/lib/jenkins/secrets/initialAdminPassword
