@@ -1,0 +1,31 @@
+#Using Ansible
+sudo apt update 
+sudo apt upgrade -y 
+#Install Ansible
+sudo apt install ansible -y
+#Verify the installation
+ansible --version
+#Creating an Ansible Inventory
+gedit hosts.ini
+#Add the following content to define the local host
+[local] 
+localhost ansible_connection=local 
+#Ansible Playbook 
+gedit setup.yml
+# add  YAML content
+- name: Basic Server Setup
+  hosts: localhost
+  become: yes   # Use sudo
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install curl
+      apt:
+        name: curl
+        state: present
+# Running the Ansible Playbook
+sudo ansible-playbook -i hosts.ini setup.yml
+
