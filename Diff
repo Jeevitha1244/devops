@@ -5,3 +5,27 @@ Linux hostname 5.15.0-... Ubuntu ...
 ver
 #output
 Microsoft Windows [Version ...]
+#check in jenkins 
+EASIEST WAY (no confusion)
+ Method 1: Check inside Jenkins UI
+Open Jenkins (your 9090 one)
+Go to: Manage Jenkins
+Click: System Information
+
+ Now look for:
+
+os.name
+✔ If you see:
+Windows 10 →  Jenkins is on Windows
+Linux →  Jenkins is on Linux/Ubuntu
+ Method 2: Check workspace path
+
+Go to:
+Manage Jenkins → System Information
+
+Look for:
+
+user.dir or workspace
+✔ If path looks like:
+C:\Users\... → Windows
+/home/... → Linux
