@@ -1,0 +1,135 @@
+# Source Code Management url
+#Maven Project: 
+https://github.com/manjushree-devops/jenkins-maven-demo.git
+#Gradle Project: 
+https://github.com/manjushree-devops/jenkins-gradel-demo.git
+# building a Maven Project type in terminal
+which mvn
+#below code in jenkins exectue windows batch command
+/usr/bin/mvn clean install 
+# if gradle
+which gradle 
+#below code in jenkins
+/opt/gradle/gradle-8.13/bin/gradle build
+#Post-build Actions in jenkins "Publish JUnit test result report"
+# For Maven Surefire/Failsafe:
+**/target/surefire-reports/*.xml 
+# For Gradle:
+**/test-results/**/*.xml 
+# Pipeline Scripts to Paste Directly on jenkins
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/manjushreedevops/jenkins-maven-demo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Output') {
+            steps {
+                sh 'echo "Maven pipeline project by Manjushree G"'
+            }
+        }
+
+    }
+}
+#for windows maven
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/manjushreedevops/jenkins-maven-demo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean install'
+            }
+        }
+
+        stage('Output') {
+            steps {
+                bat 'echo Maven pipeline project by Manjushree G'
+            }
+        }
+
+    }
+}
+# gradle script 
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/manjushree-devops/jenkins-gradeldemo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'chmod +x gradlew'
+                sh './gradlew build'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                sh './gradlew run'
+            }
+        }
+
+        stage('Output') {
+            steps {
+                sh 'echo "Gradle pipeline project by Manjushree G"'
+            }
+        }
+
+    }
+}
+# if using windows replace all with below code 
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/manjushree-devops/jenkins-gradeldemo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'gradlew.bat build'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                bat 'gradlew.bat run'
+            }
+        }
+
+        stage('Output') {
+            steps {
+                bat 'echo Gradle pipeline project by Manjushree G'
+            }
+        }
+
+    }
+}
