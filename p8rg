@@ -1,0 +1,14 @@
+# Create a New Jenkins Job item name
+ HelloMaven-CI
+#url Source Code Management
+ https://github.com/manjushree-devops/jenkins-maven-demo.git 
+# in terminal
+which mvn
+# in Build Steps Execute shell
+/usr/bin/mvn clean package
+# Add build step" again and select "Execute shell" (or "Execute Windows batch command" on Windows)
+ansible-playbook -i hosts.ini deploy.yml
+# If you are not storing them in GitHub, use the full paths: 
+ansible-playbook -i /path/to/hosts.ini /path/to/deploy.yml
+#Archiving the Artifact
+target/*.jar 
