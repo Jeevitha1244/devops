@@ -1,0 +1,7 @@
+to check in terminal is it windows or linux
+uname -a
+#output
+Linux hostname 5.15.0-... Ubuntu ...
+ver
+#output
+Microsoft Windows [Version ...]
