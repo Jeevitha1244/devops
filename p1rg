@@ -13,6 +13,10 @@ mvn -version
 #Download and Extract Gradle
 wget <https://services.gradle.org/distributions/gradle-8.14-bin.zip> 
 -P /tmp 
+
+//chatgpt
+wget https://services.gradle.org/distributions/gradle-8.14-bin.zip -P /tmp
+
 sudo unzip -d /opt/gradle /tmp/gradle-8.14-bin.zip
 #Modify bash command file by running the following command
 gedit ~/.bashrc
